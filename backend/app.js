@@ -77,14 +77,28 @@ app.get('/books', async (req, res) => {
       author: item.volumeInfo.authors ? item.volumeInfo.authors.join(', ') : 'Unknown Author',
       description: item.volumeInfo.description,
       thumbnail: item.volumeInfo.imageLinks ? item.volumeInfo.imageLinks.thumbnail : null,
+      link: item.selfLink
     }));
 
     res.json(books);
   } catch (error) {
-    console.error('Error retrieving books:', error.message);
-    res.status(500).json({ error: 'Error retrieving books' });
+    console.error('Error grabbing books:', error.message);
+    res.status(500).json({ error: 'Error grabbing books' });
   }
 });
+app.post('/books', (req, res) => {
+  try {
+    const bookData = req.body;
+    // Process the book data as needed (e.g., store it in a database)
+    console.log('Got book data:', bookData);
+
+    res.json({ message: 'Book data received' });
+  } catch (error) {
+    console.error('Error sending book data:', error.message);
+    res.status(500).json({ error: 'Error sending book data' });
+  }
+});
+
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
