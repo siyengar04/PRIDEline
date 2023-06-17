@@ -67,12 +67,13 @@ const port = 3000;
 
 app.get('/books', async (req, res) => {
   try {
-    const searchTerm = req.query.q; // Retrieve search term from query parameters
+    const searchTerm = req.query.q; // Retrieve search term from query parameteers
     const apiUrl = `https://www.googleapis.com/books/v1/volumes?q=${searchTerm}`; // Google Books API URL
 
     const response = await axios.get(apiUrl);
     const books = response.data.items.map((item) => ({
       title: item.volumeInfo.title,
+      subject: item.volumeInfo.subject,
       author: item.volumeInfo.authors ? item.volumeInfo.authors.join(', ') : 'Unknown Author',
       description: item.volumeInfo.description,
       thumbnail: item.volumeInfo.imageLinks ? item.volumeInfo.imageLinks.thumbnail : null,
