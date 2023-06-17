@@ -1,14 +1,13 @@
 import logo from "./logo.svg";
 import "./App.css";
-import Nav from "./components/Navbar.js";
-import { ChakraProvider } from "@chakra-ui/react";
-
+import { ChakraProvider, Heading } from "@chakra-ui/react";
+import CardWrapper from "./components/Cardwrapper.js";
+import Navbar from "./components/Navbar.js";
 function App() {
   return (
     <ChakraProvider>
-      <div className="App">
-        <Nav></Nav>
-      </div>
+      <Navbar />
+      <CardWrapper />
     </ChakraProvider>
   );
 }
