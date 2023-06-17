@@ -1,6 +1,9 @@
 import {
   Box,
   Button,
+  ButtonGroup,
+  Image,
+  Divider,
   Container,
   Flex,
   Heading,
@@ -10,47 +13,26 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import { ReactElement } from "react";
-import {
-  FcAbout,
-  FcAssistant,
-  FcCollaboration,
-  FcDonate,
-  FcManager,
-} from "react-icons/fc";
-
-const Card = ({ heading, description, icon, href }) => {
+import { Card, CardHeader, CardBody, CardFooter } from "@chakra-ui/react";
+const Book = ({ title, author, description, thumbnail, infoLink }) => {
   return (
-    <Box
-      maxW={{ base: "full", md: "275px" }}
-      w={"full"}
-      borderWidth="1px"
-      borderRadius="lg"
-      overflow="hidden"
-      p={5}
-    >
-      <Stack align={"start"} spacing={2}>
-        <Flex
-          w={16}
-          h={16}
-          align={"center"}
-          justify={"center"}
-          color={"white"}
-          rounded={"full"}
-          bg={useColorModeValue("gray.100", "gray.700")}
-        >
-          {icon}
-        </Flex>
-        <Box mt={2}>
-          <Heading size="md">{heading}</Heading>
-          <Text mt={1} fontSize={"sm"}>
-            {description}
-          </Text>
-        </Box>
-        <Button variant={"link"} colorScheme={"blue"} size={"sm"}>
-          Learn more
-        </Button>
-      </Stack>
-    </Box>
+    <Card maxW="sm">
+      <CardBody>
+        <Image src={thumbnail} borderRadius="lg" align={"center"} />
+        <Stack mt="6" spacing="3">
+          <Heading size="md">{title}</Heading>
+          <Text width={"20vh"}>{description}</Text>
+        </Stack>
+      </CardBody>
+      <Divider />
+      <CardFooter>
+        <ButtonGroup spacing="2">
+          <Button variant="solid" colorScheme="blue">
+            Buy now
+          </Button>
+        </ButtonGroup>
+      </CardFooter>
+    </Card>
   );
 };
 
@@ -66,48 +48,52 @@ export default function gridListWith() {
         </Text>
       </Stack>
 
-      <Container maxW={"5xl"} mt={12}>
+      <Container maxW={"9xl"} mt={12}>
         <Flex flexWrap="wrap" gridGap={6} justify="center">
-          <Card
-            heading={"Heading"}
-            icon={<Icon as={FcAssistant} w={10} h={10} />}
+          <Book
+            title={"LGBTQ Cultures"}
+            author={"Michele J. Eliason, Peggy L. Chinn"}
             description={
-              "Lorem ipsum dolor sit amet catetur, adipisicing elit."
+              "Drawn from real-world experience and current research, the fully updated LGBTQ Cultures..."
             }
-            href={"#"}
-          />
-          <Card
-            heading={"Heading"}
-            icon={<Icon as={FcCollaboration} w={10} h={10} />}
+            thumbnail={
+              "http://books.google.com/books/content?id=6SQ6DwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+            }
+            infoLink={"infoLink"}
+          ></Book>
+          <Book
+            title={"LGBTQ Cultures"}
+            author={"Michele J. Eliason, Peggy L. Chinn"}
             description={
-              "Lorem ipsum dolor sit amet catetur, adipisicing elit."
+              "Drawn from real-world experience and current research, the fully updated LGBTQ Cultures..."
             }
-            href={"#"}
-          />
-          <Card
-            heading={"Heading"}
-            icon={<Icon as={FcDonate} w={10} h={10} />}
+            thumbnail={
+              "http://books.google.com/books/content?id=6SQ6DwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+            }
+            infoLink={"infoLink"}
+          ></Book>
+          <Book
+            title={"LGBTQ Cultures"}
+            author={"Michele J. Eliason, Peggy L. Chinn"}
             description={
-              "Lorem ipsum dolor sit amet catetur, adipisicing elit."
+              "Drawn from real-world experience and current research, the fully updated LGBTQ Cultures..."
             }
-            href={"#"}
-          />
-          <Card
-            heading={"Heading"}
-            icon={<Icon as={FcManager} w={10} h={10} />}
+            thumbnail={
+              "http://books.google.com/books/content?id=6SQ6DwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+            }
+            infoLink={"infoLink"}
+          ></Book>
+          <Book
+            title={"LGBTQ Cultures"}
+            author={"Michele J. Eliason, Peggy L. Chinn"}
             description={
-              "Lorem ipsum dolor sit amet catetur, adipisicing elit."
+              "Drawn from real-world experience and current research, the fully updated LGBTQ Cultures..."
             }
-            href={"#"}
-          />
-          <Card
-            heading={"Heading"}
-            icon={<Icon as={FcAbout} w={10} h={10} />}
-            description={
-              "Lorem ipsum dolor sit amet catetur, adipisicing elit."
+            thumbnail={
+              "http://books.google.com/books/content?id=6SQ6DwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
             }
-            href={"#"}
-          />
+            infoLink={"infoLink"}
+          ></Book>
         </Flex>
       </Container>
     </Box>
