@@ -52,7 +52,7 @@ export default function gridListWith() {
         <Heading fontSize={{ base: "2xl", sm: "4xl" }} fontWeight={"bold"}>
           PrideLine
         </Heading>
-        <Text color={"gray.600"} fontSize={{ base: "sm", sm: "lg" }}>
+        <Text fontSize={{ base: "sm", sm: "lg" }}>
           View our LGBTQ friendly books!
         </Text>
       </Stack> */}
