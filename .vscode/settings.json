@@ -1,0 +1,4 @@
+{
+  "appService.defaultWebAppToDeploy": "undefined/subscriptions/f5580f98-44a5-443e-8531-7a2bae5f0579/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/PRIDELine-backend",
+  "appService.deploySubpath": "backend"
+}
