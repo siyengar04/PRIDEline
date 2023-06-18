@@ -73,12 +73,9 @@ app.get('/books', async (req, res) => {
     const response = await axios.get(apiUrl);
     const books = response.data.items.map((item) => ({
       title: item.volumeInfo.title,
-      subject: item.volumeInfo.subject,
       author: item.volumeInfo.authors ? item.volumeInfo.authors.join(', ') : 'Unknown Author',
       description: item.volumeInfo.description,
       thumbnail: item.volumeInfo.imageLinks ? item.volumeInfo.imageLinks.thumbnail : null,
-      link: item.selfLink,
-      preview: item.previewLink,
       info: item.infoLink,
     }));
 
