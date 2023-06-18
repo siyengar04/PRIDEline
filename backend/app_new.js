@@ -4,6 +4,10 @@ var debug = require('debug')('backend:server');
 var http = require('http');
 var bodyParser = require('body-parser'); // Add this line
 
+var port = normalizePort(process.env.PORT || '3001');
+app.set('port', port);
+
+
 app.use(bodyParser.json()); // Add this line to parse request body as JSON
 
 app.get('/books', async (req, res) => {
