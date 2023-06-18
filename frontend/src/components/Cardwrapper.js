@@ -23,8 +23,8 @@ import {
 } from "@chakra-ui/react";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 import axios from "axios";
-import logo from './Untitled-1.png';
-import logo2 from './Untitled-3.png';
+import logo from "./Untitled-1.png";
+import logo2 from "./Untitled-3.png";
 // let books = [
 //   {
 //     title: "LGBTQ Cultures",
@@ -35,7 +35,7 @@ import logo2 from './Untitled-3.png';
 //       "http://books.google.com/books/content?id=6SQ6DwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
 //   },
 // ];
-const imageUrl = 'img/Untitled-1.png';
+const imageUrl = "img/Untitled-1.png";
 
 const Book = ({
   title,
@@ -54,7 +54,7 @@ const Book = ({
         <Stack mt="6" spacing="3">
           <Heading size="md">{title}</Heading>
           <Text width={"25vh"}>
-            {description.length > 150
+            {typeof description !== "undefined"
               ? description.substring(0, 150) + "..."
               : ""}
           </Text>
@@ -117,7 +117,9 @@ export default function Cardwrapper() {
     <>
       <Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
-          <Box><Image boxSize='100px' src={logo2}></Image></Box>
+          <Box>
+            <Image boxSize="75px" src={logo2}></Image>
+          </Box>
 
           <Flex alignItems={"center"}>
             <Stack direction={"row"} spacing={7}>
@@ -140,8 +142,9 @@ export default function Cardwrapper() {
       <Box p={4}>
         <Stack spacing={4} as={Container} maxW={"3xl"} textAlign={"center"}>
           <Heading fontSize={{ base: "2xl", sm: "4xl" }} fontWeight={"bold"}>
-                      <Box><Image boxSize='400px' src={logo}></Image></Box>
-
+            <Box>
+              <Image src={logo}></Image>
+            </Box>
           </Heading>
           <Text fontSize={{ base: "sm", sm: "lg" }}>
             View our LGBTQ-themed books! Select a genre in the top right to get
