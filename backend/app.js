@@ -57,8 +57,10 @@ const express = require("express");
 const axios = require("axios");
 
 const app = express();
-const port = 3000;
-
+const port = 3001;
+var cors = require("cors");
+app.use(cors());
+app.use(express.json());
 app.get("/books", async (req, res) => {
   try {
     const searchTerm = req.query.q; // Retrieve search term from query parameteers
@@ -85,6 +87,7 @@ app.get("/books", async (req, res) => {
 });
 app.post("/books", async (req, res) => {
   try {
+    console.log(req.body);
     const genre = req.body.genre; // Retrieve genre from request body
     const apiUrl = `https://www.googleapis.com/books/v1/volumes?q=subject:${genre}`; // Google Books API URL
 
