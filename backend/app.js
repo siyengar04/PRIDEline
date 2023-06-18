@@ -89,12 +89,11 @@ app.post("/books", async (req, res) => {
   try {
     console.log(req.body);
     const genre = req.body.genre; // Retrieve genre from request body
-    const apiUrl = `https://www.googleapis.com/books/v1/volumes?q=subject:${genre}`; // Google Books API URL
+    const apiUrl = `https://www.googleapis.com/books/v1/volumes?q=LGBTQ+${genre}`; // Google Books API URL
 
     const response = await axios.get(apiUrl);
     const books = response.data.items.map((item) => ({
       title: item.volumeInfo.title,
-      subject: item.volumeInfo.subject,
       author: item.volumeInfo.authors
         ? item.volumeInfo.authors.join(", ")
         : "Unknown Author",
@@ -102,7 +101,8 @@ app.post("/books", async (req, res) => {
       thumbnail: item.volumeInfo.imageLinks
         ? item.volumeInfo.imageLinks.thumbnail
         : null,
-      infoLink: item.infoLink,
+      infoLink: item.volumeInfo.infoLink,
+      previewLink: item.volumeInfo.previewLink,
     }));
 
     res.json(books);

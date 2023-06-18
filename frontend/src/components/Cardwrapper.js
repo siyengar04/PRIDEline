@@ -2,32 +2,20 @@ import { ReactNode, useState, useEffect } from "react";
 import {
   Box,
   Flex,
-  Avatar,
   Link,
   Button,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  MenuDivider,
   useDisclosure,
   useColorModeValue,
   Stack,
   useColorMode,
   Center,
-  Textarea,
   HStack,
   Input,
-  InputGroup,
-  InputRightElement,
-  InputLeftElement,
   Image,
   Divider,
   Heading,
-  Icon,
   Text,
   Card,
-  CardHeader,
   CardBody,
   CardFooter,
   ButtonGroup,
@@ -47,7 +35,14 @@ import axios from "axios";
 //   },
 // ];
 
-const Book = ({ title, author, description, thumbnail, infoLink }) => {
+const Book = ({
+  title,
+  author,
+  description,
+  thumbnail,
+  infoLink,
+  previewLink,
+}) => {
   return (
     <Card maxW="sm">
       <CardBody>
@@ -67,9 +62,11 @@ const Book = ({ title, author, description, thumbnail, infoLink }) => {
               Learn More
             </Button>
           </Link>
-          <Button variant="ghost" colorScheme="blue">
-            Preview
-          </Button>
+          <Link href={previewLink} isExternal={true}>
+            <Button variant="ghost" colorScheme="blue">
+              Preview
+            </Button>
+          </Link>
         </ButtonGroup>
       </CardFooter>
     </Card>
@@ -148,7 +145,14 @@ export default function Cardwrapper() {
         <Container maxW={"9xl"} mt={12}>
           <Flex flexWrap="wrap" gridGap={10} justify="center">
             {books.map(
-              ({ title, author, description, thumbnail, infoLink }) => {
+              ({
+                title,
+                author,
+                description,
+                thumbnail,
+                infoLink,
+                previewLink,
+              }) => {
                 return (
                   <Book
                     title={title}
@@ -156,6 +160,7 @@ export default function Cardwrapper() {
                     description={description}
                     thumbnail={thumbnail}
                     infoLink={infoLink}
+                    previewLink={previewLink}
                     key={title}
                   ></Book>
                 );
