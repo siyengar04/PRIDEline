@@ -51,7 +51,11 @@ const Book = ({
         </Center>
         <Stack mt="6" spacing="3">
           <Heading size="md">{title}</Heading>
-          <Text width={"25vh"}>{description.substring(0, 150) + "..."}</Text>
+          <Text width={"25vh"}>
+            {description.length > 150
+              ? description.substring(0, 150) + "..."
+              : ""}
+          </Text>
         </Stack>
       </CardBody>
       <Divider />
