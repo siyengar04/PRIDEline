@@ -61,30 +61,11 @@ const port = 3001;
 var cors = require("cors");
 app.use(cors());
 app.use(express.json());
-app.get("/books", async (req, res) => {
-  try {
-    const searchTerm = req.query.q; // Retrieve search term from query parameteers
-    const apiUrl = `https://www.googleapis.com/books/v1/volumes?q=LGBTQ+${searchTerm}`; // Google Books API URL
-    console.log(apiUrl);
-    const response = await axios.get(apiUrl);
-    const books = response.data.items.map((item) => ({
-      title: item.volumeInfo.title,
-      author: item.volumeInfo.authors
-        ? item.volumeInfo.authors.join(", ")
-        : "Unknown Author",
-      description: item.volumeInfo.description,
-      thumbnail: item.volumeInfo.imageLinks
-        ? item.volumeInfo.imageLinks.thumbnail
-        : null,
-      info: item.infoLink,
-    }));
 
-    res.json(books);
-  } catch (error) {
-    console.error("Error grabbing books:", error.message);
-    res.status(500).json({ error: "Error grabbing books" });
-  }
+app.get("/", async (req, res) => {
+  res.send("Hello from the Express server!");
 });
+
 app.post("/books", async (req, res) => {
   try {
     console.log(req.body);
