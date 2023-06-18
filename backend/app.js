@@ -77,7 +77,9 @@ app.get('/books', async (req, res) => {
       author: item.volumeInfo.authors ? item.volumeInfo.authors.join(', ') : 'Unknown Author',
       description: item.volumeInfo.description,
       thumbnail: item.volumeInfo.imageLinks ? item.volumeInfo.imageLinks.thumbnail : null,
-      link: item.selfLink
+      link: item.selfLink,
+      preview: item.previewLink,
+      info: item.infoLink,
     }));
 
     res.json(books);
@@ -86,16 +88,27 @@ app.get('/books', async (req, res) => {
     res.status(500).json({ error: 'Error grabbing books' });
   }
 });
-app.post('/books', (req, res) => {
+app.post('/books', async (req, res) => {
   try {
-    const bookData = req.body;
-    // Process the book data as needed (e.g., store it in a database)
-    console.log('Got book data:', bookData);
+    const genre = req.body.genre; // Retrieve genre from request body
+    const apiUrl = `https://www.googleapis.com/books/v1/volumes?q=subject:${genre}`; // Google Books API URL
 
-    res.json({ message: 'Book data received' });
+    const response = await axios.get(apiUrl);
+    const books = response.data.items.map((item) => ({
+      title: item.volumeInfo.title,
+      subject: item.volumeInfo.subject,
+      author: item.volumeInfo.authors ? item.volumeInfo.authors.join(', ') : 'Unknown Author',
+      description: item.volumeInfo.description,
+      thumbnail: item.volumeInfo.imageLinks ? item.volumeInfo.imageLinks.thumbnail : null,
+      link: item.selfLink,
+      preview: item.previewLink,
+      info: item.infoLink,
+    }));
+
+    res.json(books);
   } catch (error) {
-    console.error('Error sending book data:', error.message);
-    res.status(500).json({ error: 'Error sending book data' });
+    console.error('Error searching books by genre:', error.message);
+    res.status(500).json({ error: 'Error searching books by genre' });
   }
 });
 
