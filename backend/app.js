@@ -89,7 +89,7 @@ app.post("/books", async (req, res) => {
   try {
     console.log(req.body);
     const genre = req.body.genre; // Retrieve genre from request body
-    const apiUrl = `https://www.googleapis.com/books/v1/volumes?q=LGBTQ+${genre}`; // Google Books API URL
+    const apiUrl = `https://www.googleapis.com/books/v1/volumes?q=LGBTQ+${genre}&maxResults=40`; // Google Books API URL
 
     const response = await axios.get(apiUrl);
     const books = response.data.items.map((item) => ({

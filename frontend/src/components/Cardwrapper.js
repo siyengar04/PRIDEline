@@ -25,16 +25,6 @@ import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 import axios from "axios";
 import logo from "./Untitled-1.png";
 import logo2 from "./Untitled-3.png";
-// let books = [
-//   {
-//     title: "LGBTQ Cultures",
-//     author: "Michele J. Eliason, Peggy L. Chinn",
-//     description:
-//       "Drawn from real-world experience and current research, the fully updated LGBTQ Cultures, 3rd Edition paves the way for healthcare professionals to provide well-informed, culturally sensitive healthcare to lesbian, gay, bisexual, transgender, and queer (LGBTQ) patients. This vital guide fills the LGBTQ awareness gaps, including replacing myths and stereotypes with facts, and measuring the effects of social stigma on health. Vital for all nursing specialties, this is the seminal guide to actively providing appropriate, culturally sensitive care to persons of all sexual orientations and gender identities.",
-//     thumbnail:
-//       "http://books.google.com/books/content?id=6SQ6DwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
-//   },
-// ];
 const imageUrl = "img/Untitled-1.png";
 
 const Book = ({
@@ -52,7 +42,9 @@ const Book = ({
           <Image src={thumbnail} borderRadius="md" />
         </Center>
         <Stack mt="6" spacing="3">
-          <Heading size="md">{title}</Heading>
+          <Heading size="md" width={"25vh"}>
+            {title}
+          </Heading>
           <Text width={"25vh"}>
             {typeof description !== "undefined"
               ? description.substring(0, 150) + "..."
@@ -126,7 +118,7 @@ export default function Cardwrapper() {
               <HStack>
                 {/* This is the input field that the genre is entered in*/}
                 <Input
-                  placeholder="Enter Genre here!"
+                  placeholder="Enter query here!"
                   onChange={(event) => setGenre(event.target.value)}
                 />
                 <Button onClick={handleClick}>Search!</Button>
@@ -147,7 +139,7 @@ export default function Cardwrapper() {
             </Box>
           </Heading>
           <Text fontSize={{ base: "sm", sm: "lg" }}>
-            View our LGBTQ-themed books! Select a genre in the top right to get
+            View our LGBTQ-themed books! Enter a query in the top right to get
             started. :)
           </Text>
         </Stack>
