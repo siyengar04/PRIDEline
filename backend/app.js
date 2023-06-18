@@ -64,8 +64,8 @@ app.use(express.json());
 app.get("/books", async (req, res) => {
   try {
     const searchTerm = req.query.q; // Retrieve search term from query parameteers
-    const apiUrl = `https://www.googleapis.com/books/v1/volumes?q=${searchTerm}`; // Google Books API URL
-
+    const apiUrl = `https://www.googleapis.com/books/v1/volumes?q=LGBTQ+${searchTerm}`; // Google Books API URL
+    console.log(apiUrl);
     const response = await axios.get(apiUrl);
     const books = response.data.items.map((item) => ({
       title: item.volumeInfo.title,
@@ -102,9 +102,7 @@ app.post("/books", async (req, res) => {
       thumbnail: item.volumeInfo.imageLinks
         ? item.volumeInfo.imageLinks.thumbnail
         : null,
-      link: item.selfLink,
-      preview: item.previewLink,
-      info: item.infoLink,
+      infoLink: item.infoLink,
     }));
 
     res.json(books);

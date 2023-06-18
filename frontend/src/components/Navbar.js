@@ -24,7 +24,6 @@ import {
   InputLeftElement,
 } from "@chakra-ui/react";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
-import DropdownMenu from "./GenreMenu";
 import { useRef, useEffect, useState } from "react";
 import axios from "axios";
 const NavLink = (children) => (
@@ -42,7 +41,7 @@ const NavLink = (children) => (
   </Link>
 );
 
-export default function Nav() {
+export default function Nav({ books }) {
   const { colorMode, toggleColorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
   // Change this function to send a post request to the backend with the genre
@@ -54,8 +53,9 @@ export default function Nav() {
         genre: genre,
       })
       .then((res) => {
-        console.log(res);
         console.log(res.data);
+        setBooks(res.data);
+        // books = res.data;
       })
       .catch((err) => {
         console.log(err);
