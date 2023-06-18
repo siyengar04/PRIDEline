@@ -61,14 +61,14 @@ const port = 3001;
 var cors = require("cors");
 app.use(cors());
 app.use(express.json());
+app.use(express.static("../frontend/build"));
 
-app.get("/", async (req, res) => {
-  res.send("Hello from the Express server!");
+app.get("/", (res) => {
+  res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"));
 });
 
 app.post("/books", async (req, res) => {
   try {
-    console.log(req.body);
     const genre = req.body.genre; // Retrieve genre from request body
     const apiUrl = `https://www.googleapis.com/books/v1/volumes?q=LGBTQ+${genre}&maxResults=40`; // Google Books API URL
 
