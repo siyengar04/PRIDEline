@@ -19,12 +19,14 @@ import {
   Container,
   HStack,
   Input,
+  InputGroup,
+  InputRightElement,
+  InputLeftElement,
 } from "@chakra-ui/react";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 import DropdownMenu from "./GenreMenu";
-import autosize from "autosize";
-import { useRef, useEffect } from "react";
-
+import { useRef, useEffect, useState } from "react";
+import axios from "axios";
 const NavLink = (children) => (
   <Link
     px={2}
@@ -44,8 +46,20 @@ export default function Nav() {
   const { colorMode, toggleColorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
   // Change this function to send a post request to the backend with the genre
-  const handleEnter = () => {
-    console.log("hi");
+
+  const [genre, setGenre] = useState("");
+  const handleClick = () => {
+    axios
+      .post("http://localhost:3001/books", {
+        genre: genre,
+      })
+      .then((res) => {
+        console.log(res);
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   return (
     <>
@@ -55,8 +69,14 @@ export default function Nav() {
 
           <Flex alignItems={"center"}>
             <Stack direction={"row"} spacing={7}>
-              {/* This is the input field that the genre is entered in*/}
-              <Input placeholder="Enter Genre here!" onClick={handleEnter()} />
+              <HStack>
+                {/* This is the input field that the genre is entered in*/}
+                <Input
+                  placeholder="Enter Genre here!"
+                  onChange={(event) => setGenre(event.target.value)}
+                />
+                <Button onClick={handleClick}>Search!</Button>
+              </HStack>
               <Button onClick={toggleColorMode}>
                 {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
               </Button>

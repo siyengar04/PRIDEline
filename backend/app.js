@@ -28,8 +28,6 @@
 //   next(createError(404));
 // });
 
-
-
 // https.get('https://newsapi.org/v2/everything?q=tesla&from=2023-05-16&sortBy=publishedAt&apiKey=bb24aec85dca4267bb4ac708e3aa9a18', (resp) => {
 //   let data = '';
 
@@ -43,10 +41,6 @@
 //   console.log("Error: " + err.message);
 // });
 
-
-
-
-
 // // error handler
 // app.use(function(err, req, res, next) {
 //   // set locals, only providing error in development
@@ -59,13 +53,13 @@
 // });
 
 // module.exports = app;
-const express = require('express');
-const axios = require('axios');
+const express = require("express");
+const axios = require("axios");
 
 const app = express();
-const port = 3000;
+const port = 3001;
 
-app.get('/books', async (req, res) => {
+app.get("/books", async (req, res) => {
   try {
     const searchTerm = req.query.q; // Retrieve search term from query parameteers
     const apiUrl = `https://www.googleapis.com/books/v1/volumes?q=${searchTerm}`; // Google Books API URL
@@ -74,9 +68,13 @@ app.get('/books', async (req, res) => {
     const books = response.data.items.map((item) => ({
       title: item.volumeInfo.title,
       subject: item.volumeInfo.subject,
-      author: item.volumeInfo.authors ? item.volumeInfo.authors.join(', ') : 'Unknown Author',
+      author: item.volumeInfo.authors
+        ? item.volumeInfo.authors.join(", ")
+        : "Unknown Author",
       description: item.volumeInfo.description,
-      thumbnail: item.volumeInfo.imageLinks ? item.volumeInfo.imageLinks.thumbnail : null,
+      thumbnail: item.volumeInfo.imageLinks
+        ? item.volumeInfo.imageLinks.thumbnail
+        : null,
       link: item.selfLink,
       preview: item.previewLink,
       info: item.infoLink,
@@ -84,11 +82,11 @@ app.get('/books', async (req, res) => {
 
     res.json(books);
   } catch (error) {
-    console.error('Error grabbing books:', error.message);
-    res.status(500).json({ error: 'Error grabbing books' });
+    console.error("Error grabbing books:", error.message);
+    res.status(500).json({ error: "Error grabbing books" });
   }
 });
-app.post('/books', async (req, res) => {
+app.post("/books", async (req, res) => {
   try {
     const genre = req.body.genre; // Retrieve genre from request body
     const apiUrl = `https://www.googleapis.com/books/v1/volumes?q=subject:${genre}`; // Google Books API URL
@@ -97,9 +95,13 @@ app.post('/books', async (req, res) => {
     const books = response.data.items.map((item) => ({
       title: item.volumeInfo.title,
       subject: item.volumeInfo.subject,
-      author: item.volumeInfo.authors ? item.volumeInfo.authors.join(', ') : 'Unknown Author',
+      author: item.volumeInfo.authors
+        ? item.volumeInfo.authors.join(", ")
+        : "Unknown Author",
       description: item.volumeInfo.description,
-      thumbnail: item.volumeInfo.imageLinks ? item.volumeInfo.imageLinks.thumbnail : null,
+      thumbnail: item.volumeInfo.imageLinks
+        ? item.volumeInfo.imageLinks.thumbnail
+        : null,
       link: item.selfLink,
       preview: item.previewLink,
       info: item.infoLink,
@@ -107,11 +109,10 @@ app.post('/books', async (req, res) => {
 
     res.json(books);
   } catch (error) {
-    console.error('Error searching books by genre:', error.message);
-    res.status(500).json({ error: 'Error searching books by genre' });
+    console.error("Error searching books by genre:", error.message);
+    res.status(500).json({ error: "Error searching books by genre" });
   }
 });
-
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
